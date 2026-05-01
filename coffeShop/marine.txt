@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<?php
+session_start();
+require_once 'config/database.php';
+require_once 'classes/Ad.php';
+require_once 'classes/Service.php';
+require_once 'classes/Category.php';
+require_once 'classes/Security.php';
+require_once 'includes/functions.php';
+
+$database = new Database();
+$db = $database->getConnection();
+
+$ad = new Ad($db);
+$service = new Service($db);
+
+$ad = new Ad($db);
+$category = new Category($db);
+
+// Get categories for filter
+$categories = $category->readAll();
+
+
+
+$filters = [];
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$per_page = 6;
+$limit=6;
+// Get active ads based on filters
+$ads = $ad->getActiveAds($filters, $page, $per_page,$limit);
+
+
+// No seu index.php - substitua a linha 14
+
+    $premium_ads = $ad->getPremiumAds(15);
+
+
+// Obter serviços em destaque
+$featured_services = $service->getFeaturedServices();
+?>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marine Pro - Connecting Maritime Professionals</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .botao {
+    background-color:#0d6edf;
+    
+}
+    .margem{margin-top:20px; }
+    </style>
+    
+</head>
+<body>
+    <!-- Header -->
+    <?php include 'includes/secure_header.php'; ?>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold">Serving the maritime industry by providing free multidisciplinary maritime contacts</h1>
+                    <p class="lead mb-4">Connecting companies and professionals in the maritime industry worldwide.</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="register.php" class="btn btn-success btn-lg">Register</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-sm-3 mt-md-3 margem">
+                    <!-- Carousel de Anúncios Premium -->
+                    <div id="premiumAdsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php if(count($premium_ads) > 0): ?>
+                                <?php foreach($premium_ads as $index => $ad): ?>
+                                    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                        <div class="premium-ad-card">
+                                            <?php if($ad['image_url']): ?>
+                                                <img src="<?php echo $ad['image_url']; ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($ad['title']); ?>">
+                                            <?php endif; ?>
+                                            <div class="premium-ad-content">
+                                                <span class="badge bg-warning">PREMIUM</span>
+                                                <h5><?php echo htmlspecialchars($ad['title']); ?></h5>
+                                                <p><?php echo htmlspecialchars(substr($ad['description'], 0, 100)); ?>...</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="price">€25.00</span>
+                                                    <a href="ad-details.php?id=<?php echo $ad['id']; ?>" class="btn btn-sm btn-primary botao">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="carousel-item active">
+                                    <div class="premium-ad-card text-center p-4">
+                                        <i class="fas fa-ship fa-3x text-muted mb-3"></i>
+                                        <h2>FREE REGISTRATION!</h2>
+                                        <p>Be the first to create a premium ad!</p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#premiumAdsCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#premiumAdsCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Services -->
+    <section class="featured-services py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Maritime Services</h2>
+            <p class="text-center mb-4">Find the best services for your needs</p>
+            
+            <div class="row">
+                <?php if(count($featured_services) > 0): ?>
+                    <?php foreach($featured_services as $service): ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="service-card card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo htmlspecialchars($service['title']); ?></h5>
+                                    <p class="card-text"><?php echo htmlspecialchars(substr($service['description'], 0, 150)); ?>...</p>
+                                    <div class="service-meta">
+                                        <small class="text-muted">
+                                            <i class="fas fa-tag"></i> <?php echo htmlspecialchars($service['category_name']); ?>
+                                        </small><br>
+                                        <small class="text-muted">
+                                            <i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($service['location']); ?>
+                                        </small><br>
+                                        <small class="text-muted">
+                                            <i class="fas fa-building"></i> <?php echo htmlspecialchars($service['company_name'] ?: 'Individual'); ?>
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="price fw-bold text-primary">R$ <?php echo number_format($service['price'], 2, ',', '.'); ?></span>
+                                        <a href="service-details.php?id=<?php echo $service['id']; ?>" class="btn btn-primary btn-sm">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="col-12 text-center">
+                        <p class="text-muted">No featured services available at the moment.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="login.php" class="btn btn-outline-primary">View All Services</a>
+            </div>
+        </div>
+    </section>
+                <!--ADS -->
+    <section class="featured-services py-5 bg-light">
+           <div class="container">
+            <h2 class="text-center mb-5">Maritime Advertisements</h2>
+            <p class="text-center mb-4">Find the best ads for your needs</p>
+               <div class="row">
+                                <?php foreach ($ads as $ad_item): ?>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card ad-card h-100 <?php echo $ad_item['ad_type'] == 'paid' ? 'premium' : 'free'; ?>">
+                                            <?php if ($ad_item['ad_type'] == 'paid'): ?>
+                                                <div class="position-absolute top-0 end-0 m-2">
+                                                    <span class="badge bg-warning">
+                                                        <i class="fas fa-crown me-1"></i>PREMIUM
+                                                    </span>
+                                                </div>
+                                            <?php endif; ?>
+               
+                                            <?php if (!empty($ad_item['image_url'])): ?>
+                                                <img src="<?php echo $ad_item['image_url']; ?>" class="card-img-top"
+                                                     alt="<?php echo htmlspecialchars($ad_item['title']); ?>"
+                                                     style="height: 200px; object-fit: cover;">
+                                            <?php else: ?>
+                                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+                                                     style="height: 200px;">
+                                                    <i class="fas fa-bullhorn fa-3x text-muted"></i>
+                                                </div>
+                                            <?php endif; ?>
+               
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo htmlspecialchars($ad_item['title']); ?></h5>
+                                                <p class="card-text text-muted">
+                                                    <?php echo truncateText($ad_item['description'], 120); ?>
+                                                </p>
+               
+                                                <div class="ad-meta mb-3">
+                                                    <div class="mb-2">
+                                                        <i class="fas fa-building text-primary me-1"></i>
+                                                        <small><?php echo htmlspecialchars($ad_item['company_name'] ?: 'Individual Professional'); ?></small>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <i class="fas fa-clock text-primary me-1"></i>
+                                                        <small>Expires: <?php echo date('M j, Y', strtotime($ad_item['end_date'])); ?></small>
+                                                    </div>
+                                                    <?php if (isAdExpiringSoon($ad_item['end_date'])): ?>
+                                                        <div class="mb-2">
+                                                            <span class="badge bg-warning">
+                                                                <i class="fas fa-exclamation-triangle me-1"></i>Expiring Soon
+                                                            </span>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+               
+                                            <div class="card-footer bg-transparent">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <?php if ($ad_item['ad_type'] == 'paid'): ?>
+                                                        <span class="text-warning fw-bold">
+                                                            <i class="fas fa-euro-sign me-1"></i>Premium Ad
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <span class="text-success fw-bold">
+                                                            <i class="fas fa-tag me-1"></i>Free Ad
+                                                        </span>
+                                                    <?php endif; ?>
+               
+                                                    <a href="ad-details.php?id=<?php echo $ad_item['id']; ?>"
+                                                       class="btn btn-primary btn-sm botao">
+                                                        View Details
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+               </div>
+               <div class="text-center mt-4">
+                <a href="login.php" class="btn btn-outline-primary">View All Ads</a>
+            </div>
+           </div>
+    </section>
+
+    <!-- Footer -->
+    <?php include 'includes/footer.php'; ?>
+</body>
+</html>

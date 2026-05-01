@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee - Savor the Perfect Brew!</title>
+    <!-- Bootstrap 5 CSS -->
+     
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4A2C2A;
+            --secondary-color: #D4A55A;
+            --accent-color: #8B4513;
+            --light-color: #F5E9D9;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: #f8f5f0;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(74, 44, 42, 0.85), rgba(74, 44, 42, 0.9)), url('assets/img/images.jfif');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .coffee-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .coffee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .coffee-name {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .coffee-description {
+            color: #666;
+            font-style: italic;
+        }
+
+        .features-section {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .why-choose-section {
+            padding: 80px 0;
+        }
+
+        .reason-card {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+
+        .reason-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .reason-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .visit-section {
+            background: linear-gradient(rgba(212, 165, 90, 0.9), rgba(139, 69, 19, 0.9)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+
+
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .visit-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .address-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .address-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .coffee-icon {
+            color: var(--secondary-color);
+            margin-right: 8px;
+        }
+
+        .navbar-custom {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+        }
+
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-coffee"></i> Coffee</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#menu">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#why-choose">Why Choose Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#visit">Visit Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Coffee</h1>
+            <h2 class="hero-subtitle">Savor the Perfect Brew!</h2>
+            <p class="lead">Discover the finest selection of coffee drinks, crafted with passion and expertise.</p>
+            <a href="#menu" class="btn btn-lg btn-warning mt-3">View Our Menu</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Savor the Perfect Brew!</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="coffee-card">
+                        <h3 class="coffee-name"><i class="fas fa-coffee coffee-icon"></i> Earesso</h3>
+                        <p class="coffee-description">Caffè espresso con latte e caffè americano.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="coffee-card">
+                        <h3 class="coffee-name"><i class="fas fa-mug-hot coffee-icon"></i> Latte</h3>
+                        <p class="coffee-description">Caffè lungo con latte e caffè americano.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="coffee-card">
+                        <h3 class="coffee-name"><i class="fas fa-mug-hot coffee-icon"></i> Latte</h3>
+                        <p class="coffee-description">Caffè lungo senza latte e caffè americano.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="coffee-card">
+                        <h3 class="coffee-name"><i class="fas fa-glass-whiskey coffee-icon"></i> Cold Brew</h3>
+                        <p class="coffee-description">Caffè freddo senza latte e caffè americano.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-coffee fa-2x" style="color: #8B4513;"></i>
+                        </div>
+                        <h4 class="coffee-name">Eapresso</h4>
+                        <p class="coffee-description">Caffè espresso con latte e caffè americano.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-mug-hot fa-2x" style="color: #8B4513;"></i>
+                        </div>
+                        <h4 class="coffee-name">Latte</h4>
+                        <p class="coffee-description">Caffè lungo con latte e caffè americano.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-mug-hot fa-2x" style="color: #8B4513;"></i>
+                        </div>
+                        <h4 class="coffee-name">Latte</h4>
+                        <p class="coffee-description">Caffì lungo senza latte e caffè americano.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="coffee-card text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-snowflake fa-2x" style="color: #8B4513;"></i>
+                        </div>
+                        <h4 class="coffee-name">Cold Brew</h4>
+                        <p class="coffee-description">Caffè freddo senza latte e caffè americano.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose" class="why-choose-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3 class="reason-title">Cere lavano: Bestof</h3>
+                        <p>Recognized for our commitment to quality and excellence in every cup we serve.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <h3 class="reason-title">Moring Happy -</h3>
+                        <p>Start your day right with our carefully crafted morning brews that guarantee happiness.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="reason-title">WOM Your Hou!</h3>
+                        <p>Experience the warmth and comfort of home with every visit to our coffee shop.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Us Section -->
+    <section id="visit" class="visit-section">
+        <div class="container">
+            <h2 class="visit-title">Visit Us TODAY</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="address-card">
+                        <h3 class="address-title"><i class="fas fa-map-marker-alt"></i> Our Location</h3>
+                        <p><strong>Oasis Ram Rafts</strong></p>
+                        <p>Nobatter Cheetons</p>
+                        <p>9000 G Calypso</p>
+                        <hr>
+                        <p><i class="fas fa-clock"></i> Open Daily: 7:00 AM - 9:00 PM</p>
+                        <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                        <a href="https://maps.google.com" target="_blank" class="btn btn-primary mt-3">Get
+                            Directions</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Coffee. All rights reserved.</p>
+            <p>Savor the Perfect Brew!</p>
+            <div class="mt-3">
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- Smooth scroll -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(74, 44, 42, 0.95)';
+                navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.backgroundColor = 'var(--primary-color)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

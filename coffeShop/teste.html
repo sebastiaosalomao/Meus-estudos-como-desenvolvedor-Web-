@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffe Shop | About Us</title>
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-icons/bootstrap-icons.min.css">
+</head>
+
+<body>
+<style>
+    /* ---------- SOMENTE O QUE NÃO EXISTE NO BOOTSTRAP ---------- */
+    :root {
+        --cor-1: #bb6017;
+        --cor-2: #d9bb99;
+        --cor-3: #f2ece0;
+        --cor-4: #45291b;
+        --cor-5: #e3d1bb;
+        --cor-6: #4e2a1c;
+    }
+
+    body {
+        background-color: var(--cor-3);
+    }
+
+    /* Cores personalizadas (Bootstrap não tem essas exatas) */
+    .bg-cor-2 {
+        background-color: var(--cor-2) !important;
+    }
+
+    .bg-cor-4 {
+        background-color: var(--cor-4) !important;
+    }
+
+    .bg-cor-5 {
+        background-color: var(--cor-5) !important;
+    }
+
+    .text-cor-1 {
+        color: var(--cor-1) !important;
+    }
+
+    .btn-cor-1 {
+        background-color: var(--cor-1);
+        color: white;
+        border-radius: 50px;
+        border: none;
+    }
+
+    .btn-cor-1:hover {
+        background-color: #ac5915;
+        color: white;
+    }
+
+    .btn-cor-6 {
+        background-color: var(--cor-6);
+        color: white;
+        border-radius: 50px;
+        border: none;
+    }
+
+    .btn-cor-6:hover {
+        background-color: #3b1f13;
+    }
+
+    /* Larguras fixas que o Bootstrap não oferece */
+    .w-100px {
+        width: 100px;
+    }
+
+    .w-150px {
+        width: 150px;
+    }
+
+    .w-50px {
+        width: 50px;
+    }
+
+    .h-50px {
+        height: 50px;
+    }
+
+    /* Imagens de fundo */
+    .header-home {
+        background: transparent no-repeat url('assets/img/header.webp');
+        background-position: center;
+        background-size: cover;
+        height: 600px;
+    }
+
+    .banner-img {
+        background: url("/assets/img/3chavena.webp") no-repeat center center;
+        background-size: cover;
+        height: 400px;
+    }
+
+    .banner-about {
+        background: transparent no-repeat url('/assets/img/banner-cntact.webp');
+        background-size: left;
+        background-position: left;
+        height: 300px;
+    }
+
+    .header-contact {
+        background-size: left;
+        background-position: left;
+        height: 300px;
+    }
+
+    /* Hover scale dos cards */
+    .card-cafe {
+        transition: transform 0.3s;
+    }
+
+    .card-cafe:hover {
+        transform: scale(2);
+    }
+
+    /* Ajuste do navbar-collapse (comportamento igual ao original) */
+    @media (max-width: 991px) {
+        .navbar-collapse {
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--cor-2);
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1rem 0;
+            transition: all 0.3s;
+        }
+
+        .navbar-nav .nav-item+.nav-item {
+            border-top: 2px solid var(--cor-3);
+        }
+
+        .navbar-nav {
+            padding: 1rem;
+        }
+    }
+
+    /* Grid 2 colunas para os cards na tela muito pequena (435px) */
+    @media (max-width: 435px) {
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            place-items: center;
+            padding: 0;
+        }
+
+        .botoes button {
+            width: 100px;
+        }
+
+        /* Ajustes extras para about/contact */
+        .story-card+.story-card {
+            border-left: none !important;
+            border-top: 2px solid var(--cor-2);
+        }
+
+        .contactos {
+            border-left: none !important;
+            padding-left: 0 !important;
+            margin-bottom: 20px;
+        }
+    }
+
+    /* Pequenos ajustes que não valem uma classe Bootstrap */
+    .story-text {
+        text-align: justify;
+        line-height: 25px;
+    }
+
+    .choose img,
+    .imagem-card {
+        object-fit: cover;
+    }
+
+    .redes-sociais a i {
+        color: var(--cor-1);
+        font-size: 20px;
+        padding: 2px;
+        transition: all 0.3s;
+    }
+
+    .redes-sociais a i:hover {
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- ================= MENU (NAVBAR) ================= -->
+    <nav class="navbar navbar-expand-lg bg-cor-2 py-2 px-5">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header-home d-flex align-items-center">
+        <div class="container text-white ms-md-5 ps-md-5">
+            <h1 class="display-4">Bem-vindo</h1>
+            <p class="lead">O melhor café da região</p>
+            <div class="btns-header">
+                <button class="btn-cor-1 w-150px rounded-pill py-2 me-2 mt-3">Saiba mais</button>
+                <button class="btn btn-outline-light rounded-pill w-150px py-2 mt-0">Cardápio</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="container py-5">
+        <div class="row g-3 justify-content-center">
+            <div class="col-md-3 col-12 d-flex align-items-center gap-3">
+                <img src="assets/img/coffe-svgrepo-com.svg" alt="Ícone" class="w-100px h-100px imagem-card">
+                <div class="border-start border-2 border-cor-2 ps-3">
+                    <h3 class="text-center mb-0">Grãos especiais</h3>
+                    <p class="small mt-1">Selecionados à mão</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-12 d-flex align-items-center gap-3">
+                <img src="assets/img/coffe-svgrepo-com.svg" alt="Ícone" class="w-100px h-100px imagem-card">
+                <div class="border-start border-2 border-cor-2 ps-3">
+                    <h3 class="text-center mb-0">Grãos especiais</h3>
+                    <p class="small mt-1">Selecionados à mão</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-12 d-flex align-items-center gap-3">
+                <img src="assets/img/coffe-svgrepo-com.svg" alt="Ícone" class="w-100px h-100px imagem-card">
+                <div class="border-start border-2 border-cor-2 ps-3">
+                    <h3 class="text-center mb-0">Leite cremoso</h3>
+                    <p class="small mt-1">Direto do produtor</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-12 d-flex align-items-center gap-3">
+                <img src="assets/img/coffe-svgrepo-com.svg" alt="Ícone" class="w-100px h-100px imagem-card">
+                <div class="border-start border-2 border-cor-2 ps-3">
+                    <h3 class="text-center mb-0">Padaria artesanal</h3>
+                    <p class="small mt-1">Assados na hora</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= WHY (ESCOLHA) ================= -->
+    <section class="bg-cor-4 text-white d-flex flex-wrap">
+        <div class="col-lg-6 p-4 d-flex flex-column justify-content-center">
+            <h2>Por que nos escolher?</h2>
+            <p class="text-justify">Tradição e sabor em cada xícara. Nosso café é torrado no ponto certo...</p>
+            <button class="btn bg-white text-black rounded-pill w-150px align-self-start">Leia mais</button>
+        </div>
+        <div class="col-lg-6">
+            <img src="assets/img/img2.webp" alt="Loja" class="w-100 h-100 object-fit-cover">
+        </div>
+    </section>
+
+    <!-- ================= MORNING (CARDS COM HOVER) ================= -->
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-cor-1 text-uppercase small mb-0">Manhã especial</p>
+                <h2>Comece o dia com café</h2>
+                <p class="text-justify">A combinação perfeita para despertar com energia.</p>
+                <div class="d-flex gap-3 mt-3">
+                    <button class="btn-cor-6 rounded-pill px-3 py-1">Ver mais</button>
+                    <button class="btn-cor-6 rounded-pill px-3 py-1">Comprar</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-container d-flex flex-wrap gap-3">
+                    <!-- Card com hover scale -->
+                    <div class="card-cafe text-center w-100px">
+                        <img src="assets/img/images.jfif" class="w-100 rounded-3" alt="Café">
+                        <p class="small mt-1">Expresso</p>
+                    </div>
+                    <div class="card-cafe text-center w-100px">
+                        <img src="assets/img/images.jfif" class="w-100 rounded-3" alt="Café">
+                        <p class="small mt-1">Capuccino</p>
+                    </div>
+                    <div class="card-cafe text-center w-100px">
+                        <img src="assets/img/images.jfif" class="w-100 rounded-3" alt="Café">
+                        <p class="small mt-1">Latte</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= BANNER ================= -->
+    <div class="banner-img w-100"></div>
+
+    <!-- ================= FEEDBACK ================= -->
+    <section class="container my-5">
+        <div class="row g-4">
+            <div class="col-md-6 d-flex gap-3">
+                <img src="assets/img/img7.webp" class="img-feedback rounded-circle w-50px h-50px object-fit-cover" alt="User">
+                <div>
+                    <p class="fw-bold mb-0">Ana Silva</p>
+                    <p class="small">"Melhor café da cidade, ambiente aconchegante!"</p>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex gap-3 border-start border-2 border-cor-2 ps-4">
+                <img src="assets/img/img7.webp" class="img-feedback rounded-circle w-50px h-50px object-fit-cover" alt="User">
+                <div>
+                    <p class="fw-bold mb-0">Carlos M.</p>
+                    <p class="small">"Atendimento impecável e produtos fresquinhos."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-cor-4 text-white d-flex flex-wrap justify-content-space-around align-items-center p-4 mt-4">
+        <div class="tema">
+            <h3 class="text-uppercase m-0">Cafeteria</h3>
+            <p class="m-0">Sabor que aquece</p>
+        </div>
+        <div class="redes-sociais">
+            <a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-decoration-none"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="botoes d-flex gap-3">
+            <button class="btn bg-white text-dark rounded-pill w-150px">Fale conosco</button>
+            <button class="btn bg-white text-dark rounded-pill w-150px">Trabalhe aqui</button>
+        </div>
+    </footer>
+
+</body>
+<script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+</html>
